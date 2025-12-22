@@ -1,40 +1,47 @@
-# 🎵 Spotify Virality Predictor MVP
+🎵 Spotify Virality Prediction Engine
+A Full-Stack Data Science & Engineering Case Study
+🚀 Project Overview
+This project is an end-to-end machine learning pipeline designed to predict the "Viral Probability" of music tracks using a dataset of 176,000+ songs. Beyond simple modeling, this project serves as a demonstration of high-level data engineering, database management, and resilient problem-solving in a hybrid-cloud environment.
 
-A Machine Learning-powered web application that predicts whether a song has the potential to go viral based on its audio characteristics. 
+🛠️ The Technical Stack
+Language: Python 3.10+
 
-## 📊 Project Overview
-This project uses a Random Forest model and Streamlit to predict a song's viral potential based on 11 key audio features (energy, tempo, danceability, etc.). Built with Python, Scikit-Learn, and SQL, it bridges the gap between raw data analysis and interactive user deployment.
+Database: PostgreSQL (Relational storage & SQL-based feature engineering)
 
-## 🚀 Features
-* **Interactive Prediction**: Input song characteristics via a Streamlit sidebar to get real-time results.
-* **ML Powered**: Utilizes a trained Random Forest Classifier to identify patterns in viral hits.
-* **Data-Driven**: Trained on a dataset of Spotify tracks, exploring the relationship between technical audio traits and popularity.
+Libraries: Pandas, Scikit-Learn (RandomForest), SQLAlchemy, Imbalanced-Learn (SMOTE), Seaborn
 
-## 🛠️ Technical Stack
-* **Language:** Python
-* **Libraries:** Pandas, Scikit-Learn, Streamlit, Joblib
-* **Database:** PostgreSQL (Data source)
-* **Visualization:** Power BI (Upcoming integration)
+Infrastructure: Google Colab, VS Code, ngrok (TCP Tunneling for database-to-cloud connection)
 
-## 📋 The 11 Audio Features
-The model evaluates the following traits:
-1. Danceability 
-2. Energy 
-3. Loudness 
-4. Speechiness 
-5. Acousticness 
-6. Instrumentalness 
-7. Liveness 
-8. Valence 
-9. Tempo 
-10. Duration (ms) 
-11. Artist Followers
+🧠 Key Technical Challenges & Solutions (The "Engineering Log")
+A recruiter's favorite section. This highlights your resilience.
 
-## ⚙️ How to Run Locally
-1. Clone this repository.
-2. Ensure you have the `.joblib` model files in the same directory.
-3. Install requirements: `pip install streamlit pandas scikit-learn`
-4. Launch the app: `streamlit run app.py`
+1. Relational Integrity & Database Recovery
+Challenge: Encountered index corruption during the transition from raw CSV to PostgreSQL, resulting in "Zebra" indices (0, 1, 2...) overwriting the unique Spotify track_id.
 
----
-*Developed as a Machine Learning MVP showcase.*
+Solution: Built a standalone Python-driven Recovery Script using SQLAlchemy to drop the corrupted schema and re-map the 22-character Spotify hashes, ensuring 100% relational integrity between the track and audio_features tables.
+
+2. Handling Class Imbalance
+Challenge: Viral tracks represent less than 5% of the dataset, creating a significant bias in standard classification models.
+
+Solution: Implemented SMOTE (Synthetic Minority Over-sampling Technique) to balance the training set, allowing the Random Forest model to identify the subtle audio "signatures" of viral hits without overfitting.
+
+3. Hybrid-Cloud Infrastructure Pivot
+Challenge: Local visualization tools (Power BI) were too rigid for the desired custom aesthetics, but cloud environments (Google Colab) could not natively access the local PostgreSQL database.
+
+Solution: Architected a Secure TCP Tunnel using ngrok. When network latency persisted, I pivoted to a Static Data Snapshot (CSV) strategy to ensure project delivery, demonstrating the ability to choose reliability over architectural complexity when meeting deadlines.
+
+📊 Data Insights: The "Viral Signature"
+The model identified several key "green flags" for track virality:
+
+The Energy-Danceability Sweet Spot: Viral tracks consistently cluster in high-energy (0.7+) and high-danceability (0.6+) quadrants.
+
+Valence as a Predictor: Positive musical "mood" (Valence) showed a stronger correlation with virality than tempo or loudness.
+
+🎯 How to Run
+Clone the Repo: git clone https://github.com/your-username/spotify-viral-prediction.git
+
+Restore Database: Run db_recovery.py to initialize the PostgreSQL schema.
+
+Train Model: Open the Jupyter Notebook to run the Random Forest pipeline.
+
+Visualize: Run the Seaborn script to generate the virality insights report.
