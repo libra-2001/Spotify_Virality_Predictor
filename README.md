@@ -1,5 +1,5 @@
-🎵 Spotify Virality Prediction Engine
-A Full-Stack Data Science & Engineering Case Study
+🎵 Spotify Virality Prediction Engine: A Full-Stack Data Science & Engineering Case Study
+
 🚀 Project Overview
 This project is an end-to-end machine learning pipeline designed to predict the "Viral Probability" of music tracks using a dataset of 176,000+ songs. Beyond simple modeling, this project serves as a demonstration of high-level data engineering, database management, and resilient problem-solving in a hybrid-cloud environment.
 
